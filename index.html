@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+           body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('background.jpg'); /* Replace 'background.jpg' with your actual background image */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            background-color: #333;
+        }
+
+        nav {
+            background-color: #555;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+
+        .todo-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .todo-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add-task {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .add-task input {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .add-task button {
+            padding: 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>To-Do List</h1>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <section>
+        <ul class="todo-list" id="todo-list">
+            <!-- To-do items will be added dynamically here -->
+        </ul>
+        <div class="add-task">
+            <!-- Added label for the input -->
+            <label for="new-task">New Task:</label>
+            <input type="text" id="new-task" placeholder="Add a new task">
+            <button onclick="addTask()">Add</button>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2023 To-Do List App
+    </footer>
+
+    <script>
+         function addTask() {
+            const newTaskInput = document.getElementById('new-task');
+            const taskText = newTaskInput.value.trim();
+
+            if (taskText !== '') {
+                const todoList = document.getElementById('todo-list');
+
+                const listItem = document.createElement('li');
+                listItem.className = 'todo-item';
+                listItem.innerHTML = `
+                    <span>${taskText}</span>
+                    <button onclick="removeTask(this)">Remove</button>
+                `;
+
+                todoList.appendChild(listItem);
+
+                newTaskInput.value = '';
+            }
+        }
+
+        function removeTask(button) {
+            const listItem = button.parentNode;
+            const todoList = listItem.parentNode;
+            todoList.removeChild(listItem);
+        }
+    </script>
+</body>
+
+</html>
